@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simulation Selector</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+      }
+
+      #buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      button {
+        padding: 8px 16px;
+        border-radius: 4px;
+        border: 1px solid #888;
+        background: #f0f0f0;
+        cursor: pointer;
+      }
+
+      button.active {
+        background: #d0e4ff;
+        border-color: #3367d6;
+      }
+
+      video {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Simulation Selector</h1>
+
+    <div id="buttons">
+      <button class="active" data-src="sim1.mp4">Simulation 1</button>
+      <button data-src="sim2.mp4">Simulation 2</button>
+      <button data-src="sim3.mp4">Simulation 3</button>
+    </div>
+
+    <video
+      id="simVideo"
+      src="sim1.mp4"
+      controls
+      autoplay
+      loop
+      muted
+      playsinline
+    ></video>
+
+    <script>
+      const video = document.getElementById("simVideo");
+      const buttons = document.querySelectorAll("#buttons button");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // update video source
+          const src = btn.getAttribute("data-src");
+          video.src = src;
+          video.play();
+
+          // update button highlighting
+          buttons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
