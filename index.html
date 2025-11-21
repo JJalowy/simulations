@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+      }
+      #buttons {
+        display: flex;
+        gap: 10px;
+      }
+      button.active {
+        background: #d0e4ff;
+      }
+      video {
+        width: 900px;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="buttons">
+      <button class="active" data-src="sim1.mp4">Simulation 1</button>
+      <button data-src="sim2.mp4">Simulation 2</button>
+      <button data-src="sim3.mp4">Simulation 3</button>
+    </div>
+
+    <video id="player" src="sim1.mp4" controls autoplay loop></video>
+
+    <script>
+      const player = document.getElementById("player");
+      const buttons = document.querySelectorAll("#buttons button");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          player.src = btn.dataset.src;
+          player.play();
+
+          buttons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
